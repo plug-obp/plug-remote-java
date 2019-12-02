@@ -1,0 +1,6 @@
+dependencies {
+    compile group: 'fr.ensta-bretagne', name: 'plug-utils', version: plug.version
+	compile group: 'fr.ensta-bretagne', name: 'plug-runtime-core', version: plug.version
+    
+    compile group: 'fr.ensta-bretagne', name: 'plug-runtime-tsm', version: plug.version
+}

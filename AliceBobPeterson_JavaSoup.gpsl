@@ -1,0 +1,40 @@
+aliceCS			= |s.state[plug.language.soup.examples.mutex.peterson.Actor.Alice.ordinal()]==plug.language.soup.examples.mutex.peterson.State.CRITICAL|
+bobCS			= |s.state[plug.language.soup.examples.mutex.peterson.Actor.Bob.ordinal()]==plug.language.soup.examples.mutex.peterson.State.CRITICAL|
+exclusion  		= []!(aliceCS && bobCS)
+
+eventuallyOneInCS 	= []<>(aliceCS || bobCS)
+
+exclusionI_source 	= []!(|s.state[plug.language.soup.examples.mutex.peterson.Actor.Alice.ordinal()]==plug.language.soup.examples.mutex.peterson.State.IDLE| 
+					   && |s.state[plug.language.soup.examples.mutex.peterson.Actor.Bob.ordinal()]==plug.language.soup.examples.mutex.peterson.State.IDLE|)
+exclusionI_target	= []!(|t.state[plug.language.soup.examples.mutex.peterson.Actor.Alice.ordinal()]==plug.language.soup.examples.mutex.peterson.State.IDLE| 
+					   && |t.state[plug.language.soup.examples.mutex.peterson.Actor.Bob.ordinal()]==plug.language.soup.examples.mutex.peterson.State.IDLE|)
+
+stopInCS = [] !aliceCS
+
+no_deadlock = [] !|deadlock|
+
+fairness_s 		= 
+	let
+		aliceFlagUP=|s.flags[0]==true|,
+		bobFlagUP=|s.flags[1]==true|
+	in 
+		 ([]  (  (aliceFlagUP -> (<> aliceCS) )
+		      && (bobFlagUP -> (<> bobCS))))  
+
+fairness_f_s 		= 
+	let
+		aliceFlagUP=|f.name == 'Alice_wantsIn'|,
+		bobFlagUP=|f.name == 'Bob_wantsIn'|
+	in 
+		 ([]  (  (aliceFlagUP -> (<> aliceCS) )
+		      && (bobFlagUP -> (<> bobCS))))  
+
+idling = let
+		aliceFlagUP=|s.flags[0]==true|,
+		bobFlagUP=|s.flags[1]==true|
+	in
+		([]  (!aliceFlagUP -> (![] aliceCS))
+		   && (!bobFlagUP -> (![] bobCS)) )
+infoften 		=  [] <> bobCS
+
+all = (exclusion & eventuallyOneInCS & fairness_s & idling)
