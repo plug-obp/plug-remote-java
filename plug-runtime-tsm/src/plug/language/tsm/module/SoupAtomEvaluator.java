@@ -2,10 +2,11 @@ package plug.language.tsm.module;
 
 import org.apache.commons.jexl3.*;
 import plug.language.tsm.ast.Behavior;
+import plug.language.tsm.module.semantics.Action;
 import plug.runtime.core.defaults.DefaultAtomEvaluator;
 
 @SuppressWarnings("Duplicates")
-public class SoupAtomEvaluator extends DefaultAtomEvaluator<Object, Behavior<Object>, Void> {
+public class SoupAtomEvaluator extends DefaultAtomEvaluator<Object, Action<Object>, Void> {
     // Create or retrieve an engine
     JexlEngine jexl = new JexlBuilder().create();
 
@@ -35,7 +36,7 @@ public class SoupAtomEvaluator extends DefaultAtomEvaluator<Object, Behavior<Obj
     }
 
     @Override
-    public boolean[] getAtomicPropositionValuations(Object source, Behavior<Object> fireable, Void payload, Object target) {
+    public boolean[] getAtomicPropositionValuations(Object source, Action<Object> fireable, Void payload, Object target) {
         // Create a context and add data
         JexlContext context = new ClassAwareContext();
         context.set("s", source );
