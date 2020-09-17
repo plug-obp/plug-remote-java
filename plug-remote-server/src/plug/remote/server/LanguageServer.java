@@ -1,6 +1,6 @@
 package plug.remote.server;
 
-import plug.language.tsm.examples.ExampleModels;
+import plug.language.tsm.examples.cta.*;
 import plug.language.tsm.ast.BehaviorSoup;
 import plug.language.tsm.module.SoupAtomEvaluator;
 import plug.language.tsm.module.SoupMarshaller;
@@ -12,6 +12,7 @@ import plug.runtime.core.LanguageModule;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
 
 public class LanguageServer {
     int port;
@@ -26,8 +27,9 @@ public class LanguageServer {
     public static void main(String args[]) {
         //BehaviorSoup soup = ExampleModels.counters(2, 2);
         //BehaviorSoup soup = ExampleModels.counter( 2);
-        BehaviorSoup soup = ExampleModels.aliceBobPeterson();
+        //BehaviorSoup soup = ExampleModels.aliceBobPeterson();
         //BehaviorSoup soup = ExampleModels.nbits(10);
+    	BehaviorSoup soup = new ExMain().model();
         LanguageModule soupModule = new LanguageModule(
                 new SoupTransitionRelation(soup),
                 new SoupAtomEvaluator(),

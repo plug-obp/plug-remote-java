@@ -1,0 +1,4 @@
+scadaNotAlert = []! |s.sAlert|
+attack_success = [] ! |s.wtOverflow|
+attack_success1 = [] ! (|s.wtOverflow| or |s.wtWaterLevel==0|)
+attack_success2 = [] ! |s.wtWaterLevel==0|
