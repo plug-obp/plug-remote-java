@@ -1,11 +1,39 @@
-buildscript {
+
+version='1.0.0'
+subprojects {
+	version='1.0.0'
+	apply plugin: 'java'
+	apply plugin: 'maven-publish'
+
 	repositories {
-		jcenter()
-		maven { url "https://dl.bintray.com/plug-obp/maven" }
+		mavenCentral()
+		maven { url '/Users/ciprian/Playfield/maven_repository' }
 	}
-	dependencies {
-		classpath group: 'fr.ensta-bretagne', name: 'plug-plugin', version: '0.7'
+
+	compileJava.options.encoding = 'UTF-8'
+	sourceSets {
+		main {
+			java { srcDir  'src' }
+			resources { srcDir 'resources'}
+		}
+		test {
+			java { srcDir 'tests/src' }
+			resources { srcDir 'tests/resources'}
+		}
+	}
+
+	publishing {
+		repositories {
+			maven {
+				// change to point to your repo, e.g. http://my.org/repo
+				url = '/Users/ciprian/Playfield/maven_repository'
+			}
+		}
+		publications {
+			jar(MavenPublication) {
+				groupId = 'fr.ensta-bretagne'
+				from components.java
+			}
+		}
 	}
 }
-
-apply plugin: 'plug.plugin'

@@ -1,4 +1,4 @@
-include 'plug-runtime-core'
-include 'plug-remote-server'
-include 'plug-runtime-soup'
-include 'plug-runtime-tsm'
+include 'obp2-rj-runtime-core'
+include 'obp2-rj-remote-server'
+include 'obp2-rj-runtime-soup'
+include 'obp2-rj-runtime-tsm'
