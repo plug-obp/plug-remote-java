@@ -1,0 +1,5 @@
+dependencies {
+    compile group: 'fr.ensta-bretagne', name: 'plug-utils', version: '0.0.8'
+	compile project(':obp2-rj-runtime-core')
+    compile project(':obp2-rj-runtime-tsm')
+}
