@@ -1,5 +1,5 @@
 dependencies {
-    compile group: 'fr.ensta-bretagne', name: 'plug-utils', version: '0.0.8'
+    compile group: 'fr.ensta-bretagne', name: 'obp2-utils', version: '1.0.0'
     compile project(':obp2-rj-runtime-core')
     
     //for atomic proposition evaluation
